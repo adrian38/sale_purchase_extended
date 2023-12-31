@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_po_expired_check" model="ir.cron">
+        <field name="name">Purchase order; check expired</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <!-- <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field> -->
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(DateTime.now().replace(hour=1, minute=59) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+        <!-- <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d %H:%M:%S')" /> -->
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_purchase_order"/>
+        <field name="code">model.check_expired()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>
